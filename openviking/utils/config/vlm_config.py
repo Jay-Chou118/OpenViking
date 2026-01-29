@@ -9,15 +9,15 @@ from openviking.models.vlm import VLMFactory, VLMBase
 
 
 class VLMConfig(BaseModel):
-    """VLM configuration, supports multiple backends (openai, volcengine)."""
+    """VLM configuration, supports multiple providers (openai, volcengine)."""
 
     model: Optional[str] = Field(default=None, description="Model name")
     api_key: Optional[str] = Field(default=None, description="API key")
     api_base: Optional[str] = Field(default=None, description="API base URL")
     temperature: float = Field(default=0.0, description="Generation temperature")
     max_retries: int = Field(default=2, description="Maximum retry attempts")
-    backend: Literal["openai", "volcengine"] = Field(
-        default="openai", description="Backend provider"
+    provider: Literal["openai", "volcengine"] = Field(
+        default="volcengine", description="Provider type"
     )
 
     _vlm_instance: Optional[VLMBase] = None
@@ -34,13 +34,14 @@ class VLMConfig(BaseModel):
                 "api_key": "OPENVIKING_VLM_API_KEY",
                 "model": "OPENVIKING_VLM_MODEL",
                 "api_base": "OPENVIKING_VLM_API_BASE",
-                "backend": "OPENVIKING_VLM_BACKEND",
+                "provider": "OPENVIKING_VLM_PROVIDER",
             }
             for field, env_var in env_mapping.items():
                 if data.get(field) is None:
                     env_val = os.getenv(env_var)
                     if env_val is not None:
                         data[field] = env_val
+                
         return data
 
     @model_validator(mode='after')

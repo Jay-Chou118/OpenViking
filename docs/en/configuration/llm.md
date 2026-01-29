@@ -9,6 +9,7 @@ Used for generating L0/L1 content from resources.
 ```json
 {
   "vlm": {
+    "provider": "volcengine",
     "api_key": "your-volcengine-api-key",
     "model": "doubao-seed-1-8-251228",
     "base_url": "https://ark.cn-beijing.volces.com/api/v3"

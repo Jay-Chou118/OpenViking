@@ -17,8 +17,8 @@ class OpenAIVLM(VLMBase):
         super().__init__(config)
         self._sync_client = None
         self._async_client = None
-        # Ensure backend type is correct
-        self.backend = "openai"
+        # Ensure provider type is correct
+        self.provider = "openai"
 
     def get_client(self):
         """Get sync client"""
@@ -46,7 +46,7 @@ class OpenAIVLM(VLMBase):
             completion_tokens = response.usage.completion_tokens
             self.update_token_usage(
                 model_name=self.model or "gpt-4o-mini",
-                backend="openai",
+                provider=self.provider,
                 prompt_tokens=prompt_tokens,
                 completion_tokens=completion_tokens,
             )

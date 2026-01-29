@@ -104,12 +104,12 @@ def test_embedding_validation():
     except ValueError as e:
         print(f"   Correctly raised exception: {e}")
 
-    # Test 2: OpenAI backend missing api_key
-    print("\n2. Test OpenAI backend missing api_key...")
+    # Test 2: OpenAI provider missing api_key
+    print("\n2. Test OpenAI provider missing api_key...")
     try:
         config = EmbeddingConfig(
             dense=EmbeddingModelConfig(
-                backend="openai",
+                provider="openai",
                 model="text-embedding-3-small"
             )
         )
@@ -117,12 +117,12 @@ def test_embedding_validation():
     except ValueError as e:
         print(f"   Correctly raised exception: {e}")
 
-    # Test 3: OpenAI backend complete config
-    print("\n3. Test OpenAI backend complete config...")
+    # Test 3: OpenAI provider complete config
+    print("\n3. Test OpenAI provider complete config...")
     try:
         config = EmbeddingConfig(
             dense=EmbeddingModelConfig(
-                backend="openai",
+                provider="openai",
                 model="text-embedding-3-small",
                 api_key="fake-api-key-for-testing",
                 dimension=1536
@@ -160,7 +160,7 @@ def test_vlm_validation():
         config = VLMConfig(
             model="gpt-4",
             api_key="fake-api-key-for-testing",
-            backend="openai"
+            provider="openai"
         )
         print(f"   Pass")
     except ValueError as e:
